@@ -2,7 +2,12 @@
 """Implementation of a thread-safe token bucket using threads and queues."""
 
 from __future__ import print_function, division
-from six.moves import queue
+
+try:
+    import queue
+except ImportError:
+    import Queue as queue
+
 import logging
 import threading
 import time
