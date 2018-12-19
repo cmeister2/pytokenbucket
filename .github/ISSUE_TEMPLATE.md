@@ -1,4 +1,4 @@
-* Python Token Bucket version:
+* pyTokenBucket version:
 * Python version:
 * Operating System:
 

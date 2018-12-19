@@ -1,5 +1,5 @@
-Welcome to Python Token Bucket's documentation!
-===============================================
+Welcome to pyTokenBucket's documentation!
+=========================================
 
 .. toctree::
    :maxdepth: 2
