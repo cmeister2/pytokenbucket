@@ -14,12 +14,13 @@ def ensure_gap(timestamps, gap_ms):
         return
 
     for ii in range(len(timestamps) - 1):
+        measured_gap_ms = (timestamps[ii + 1] - timestamps[ii]) * 1000
+
         print("Comparing: {0} - {1} = {2} ms vs {3} ms"
-              .format(timestamps[ii],
-                      timestamps[ii + 1],
-                      (timestamps[ii + 1] - timestamps[ii]) * 1000,
-                      gap_ms))
-        assert (timestamps[ii + 1] - timestamps[ii]) * 1000 >= gap_ms
+              .format(timestamps[ii], timestamps[ii + 1], measured_gap_ms, gap_ms))
+
+        # Ensure that we're not drastically under the gap (can be a few ms under).
+        assert measured_gap_ms >= gap_ms - 3
 
 
 def test_get_tokens():
