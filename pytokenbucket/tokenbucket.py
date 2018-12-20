@@ -22,7 +22,14 @@ class TokenBucket(object):
                  refresh_amount=1,
                  refresh_period_ms=1000,
                  start_filled=True):
-        """Construct a TokenBucket instance."""
+        """Construct a TokenBucket instance.
+
+        Args:
+            bucket_size (int): The maximum number of tokens this bucket can hold. Extra tokens are thrown away.
+            refresh_amount (int): The number of tokens to refresh each period.
+            refresh_period_ms (int): The duration between token refreshes in milliseconds.
+            start_filled (bool): Whether the bucket starts filled or empty.
+        """
         super(TokenBucket, self).__init__()
 
         self.bucket_size = bucket_size
@@ -67,7 +74,12 @@ class TokenBucket(object):
         log.debug("Stopped token filler thread")
 
     def get_token(self):
-        """Get a token. Blocks until a token is retrieved or the token bucket is stopped."""
+        """Get a token. Blocks until a token is retrieved or the token bucket is stopped.
+
+        Returns:
+            True if a token was retrieved. False if the token bucket was stopped.
+
+        """
         while True:
             try:
                 token = self.timer_queue.get(timeout=self.refresh_period_ms / 1000)
@@ -80,9 +92,23 @@ class TokenBucket(object):
                     return False
 
     def deferred_call(self, callable):
-        """Return a callable which calls the argument when a token is available."""
+        """Return a callable which calls the argument when a token is available.
+
+        This method can be used to make a wrapper for a callable which can then be used by the multiprocessing.dummy
+        Pool with the `apply_async` method. It also abstracts away the internals of getting a token.
+
+        Args:
+            callable (Callable): a callable which is called when a token is available. If the token bucket is
+                stopped before a token is available, the callable is not called.
+
+        Returns:
+            A callable which waits for a token to become available before calling the inner callable.
+
+        """
         def _proxy(*args, **kwargs):
             if self.get_token():
                 return callable(*args, **kwargs)
+            else:
+                log.info("Did not call %r as a token was not available", callable)
 
         return _proxy
