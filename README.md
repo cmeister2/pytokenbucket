@@ -1,9 +1,7 @@
 # pyTokenBucket
 
 [![pypi version](https://img.shields.io/pypi/v/pytokenbucket.svg)](https://pypi.python.org/pypi/pytokenbucket)
-
 [![Travis Status](https://img.shields.io/travis/cmeister2/pytokenbucket.svg)](https://travis-ci.org/cmeister2/pytokenbucket)
-
 [![Documentation Status](https://readthedocs.org/projects/pytokenbucket/badge/?version=latest)](https://pytokenbucket.readthedocs.io/en/latest/?badge=latest)
 
 A token bucket implementation for Python which only uses the standard
