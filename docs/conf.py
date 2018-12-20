@@ -32,7 +32,7 @@ import pytokenbucket
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
-extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode', 'm2r']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode', 'm2r', 'sphinx.ext.napoleon']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -78,6 +78,8 @@ pygments_style = 'sphinx'
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
 
+# Ensure __init__ is documented.
+autoclass_content = 'both'
 
 # -- Options for HTML output -------------------------------------------
 

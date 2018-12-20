@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Use `flake8-docstrings` to police pydocstyle issues
+- Use `darglint` to police that docstrings contain useful information
 
 ## [0.1.1] - 2018-12-19
 ### Changed
